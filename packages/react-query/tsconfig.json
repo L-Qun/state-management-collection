@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "react-query": ["./src/index.ts"],
+    },
+  },
+  "include": ["src"],
+}

@@ -5,8 +5,9 @@
   "private": true,
   "license": "ISC",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --passWithNoTests --config jest.config.ts",
     "lint": "eslint",
     "format": "prettier",
     "build": "concurrently 'pnpm:build:*'",
@@ -15,11 +16,16 @@
     "build:valtio": "rollup -c --package valtio",
     "build:react-query": "rollup -c --package react-query"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/plugin-transform-react-jsx": "^7.23.4",
     "@babel/plugin-transform-typescript": "^7.23.6",
     "@babel/preset-env": "^7.23.9",
+    "@jest/types": "^29.6.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -27,12 +33,15 @@
     "@testing-library/dom": "^9.3.3",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.17",
     "@types/react": "^18.2.52",
     "@types/react-dom": "^18.2.18",
     "benny": "^3.7.1",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^22.1.0",
     "prettier": "^3.2.4",
     "react": "^18.2.0",

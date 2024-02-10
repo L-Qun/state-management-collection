@@ -1,11 +1,11 @@
 {
-  "name": "custom-zustand",
+  "name": "zustand",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config jest.config.ts"
   },
   "keywords": [
     "react",
@@ -21,6 +21,7 @@
   "sideEffects": false,
   "license": "ISC",
   "dependencies": {
-    "shared": "workspace:*"
+    "shared": "workspace:*",
+    "zustand": "^4.5.0"
   }
 }

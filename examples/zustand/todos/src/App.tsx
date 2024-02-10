@@ -32,7 +32,7 @@ const useStore = create<Store>((set) => ({
   },
 }));
 
-function Filter() {
+const Filter = () => {
   const { filter, setFilter } = useStore();
   return (
     <Radio.Group onChange={(e) => setFilter(e.target.value)} value={filter}>
@@ -41,9 +41,9 @@ function Filter() {
       <Radio value="incompleted">Incompleted</Radio>
     </Radio.Group>
   );
-}
+};
 
-function TodoItem({ item }: { item: Todo }) {
+const TodoItem = ({ item }: { item: Todo }) => {
   const { setTodos } = useStore();
   const { title, completed, id } = item;
 
@@ -67,9 +67,9 @@ function TodoItem({ item }: { item: Todo }) {
       <CloseOutlined onClick={remove} />
     </>
   );
-}
+};
 
-function Filtered() {
+const Filtered = () => {
   const { todos, filter } = useStore();
   const filterTodo = todos.filter((todo) => {
     if (filter === "all") return true;
@@ -87,9 +87,9 @@ function Filtered() {
       <TodoItem item={item} />
     </a.div>
   ));
-}
+};
 
-function App() {
+const App = () => {
   const { setTodos } = useStore();
   const add = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,6 +108,6 @@ function App() {
       <Filtered />
     </form>
   );
-}
+};
 
 export default App;

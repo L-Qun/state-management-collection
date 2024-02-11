@@ -13,26 +13,46 @@ type Todo = {
   completed: boolean
 }
 
-type Store = {
+type State = {
   todos: Array<Todo>
   filter: FilterType
+}
+
+type Actions = {
   setFilter: (filter: FilterType) => void
   setTodos: (fn: (todos: Array<Todo>) => Array<Todo>) => void
+  reset: () => void
 }
+
+const INITIAL_STATE: State = {
+  filter: 'all',
+  todos: [{ title: '吃饭', completed: false, id: 0 }],
+}
+
+const useStore = create<State & Actions>((set) => ({
+  ...INITIAL_STATE,
+  setFilter(filter) {
+    set({ filter })
+  },
+  setTodos(fn) {
+    set((prev) => ({ todos: fn(prev.todos) }))
+  },
+  reset() {
+    set(INITIAL_STATE)
+  },
+}))
+
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {})
+})
+
+afterEach(() => {
+  ;(console.warn as jest.Mock).mockRestore()
+  useStore.getState().reset()
+})
 
 describe('测试re-render', () => {
   it('不加selector', async () => {
-    const useStore = create<Store>((set) => ({
-      filter: 'all',
-      todos: [{ title: '吃饭', completed: false, id: 0 }],
-      setFilter(filter) {
-        set({ filter })
-      },
-      setTodos(fn) {
-        set((prev) => ({ todos: fn(prev.todos) }))
-      },
-    }))
-
     let renderCount = 0
 
     const Display = () => {
@@ -66,17 +86,6 @@ describe('测试re-render', () => {
   })
 
   it('加selector', async () => {
-    const useStore = create<Store>((set) => ({
-      filter: 'all',
-      todos: [{ title: '吃饭', completed: false, id: 0 }],
-      setFilter(filter) {
-        set({ filter })
-      },
-      setTodos(fn) {
-        set((prev) => ({ todos: fn(prev.todos) }))
-      },
-    }))
-
     let renderCount = 0
 
     const Display = () => {
@@ -110,17 +119,6 @@ describe('测试re-render', () => {
   })
 
   it('不加shallow', async () => {
-    const useStore = create<Store>((set) => ({
-      filter: 'all',
-      todos: [{ title: '吃饭', completed: false, id: 0 }],
-      setFilter(filter) {
-        set({ filter })
-      },
-      setTodos(fn) {
-        set((prev) => ({ todos: fn(prev.todos) }))
-      },
-    }))
-
     let renderCount = 0
 
     const Display = () => {
@@ -157,17 +155,6 @@ describe('测试re-render', () => {
   })
 
   it('加shallow', async () => {
-    const useStore = create<Store>((set) => ({
-      filter: 'all',
-      todos: [{ title: '吃饭', completed: false, id: 0 }],
-      setFilter(filter) {
-        set({ filter })
-      },
-      setTodos(fn) {
-        set((prev) => ({ todos: fn(prev.todos) }))
-      },
-    }))
-
     let renderCount = 0
 
     const Display = () => {
@@ -207,17 +194,6 @@ describe('测试re-render', () => {
   })
 
   it('使用useShallow', async () => {
-    const useStore = create<Store>((set) => ({
-      filter: 'all',
-      todos: [{ title: '吃饭', completed: false, id: 0 }],
-      setFilter(filter) {
-        set({ filter })
-      },
-      setTodos(fn) {
-        set((prev) => ({ todos: fn(prev.todos) }))
-      },
-    }))
-
     let renderCount = 0
 
     const Display = () => {

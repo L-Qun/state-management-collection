@@ -91,11 +91,16 @@ importers:
 
   packages/zustand:
     specifiers:
+      '@types/use-sync-external-store': ^0.0.6
       shared: workspace:*
+      use-sync-external-store: ^1.2.0
       zustand: ^4.5.0
     dependencies:
       shared: link:../shared
+      use-sync-external-store: 1.2.0
       zustand: 4.5.0
+    devDependencies:
+      '@types/use-sync-external-store': 0.0.6
 
 packages:
 
@@ -2095,6 +2100,10 @@ packages:
 
   /@types/tough-cookie/4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+    dev: true
+
+  /@types/use-sync-external-store/0.0.6:
+    resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
     dev: true
 
   /@types/yargs-parser/21.0.3:

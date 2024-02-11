@@ -1,5 +1,5 @@
 {
-  "name": "zustand",
+  "name": "custom-zustand",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -22,6 +22,10 @@
   "license": "ISC",
   "dependencies": {
     "shared": "workspace:*",
+    "use-sync-external-store": "^1.2.0",
     "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/use-sync-external-store": "^0.0.6"
   }
 }

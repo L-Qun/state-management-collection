@@ -5,8 +5,6 @@
     "strict": true,
     "target": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
-  },
-  "include": [],
-  "exclude": [],
+    "jsx": "react"
+  }
 }

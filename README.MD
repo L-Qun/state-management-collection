@@ -23,3 +23,15 @@ pnpm run build
 ```
 pnpm run test
 ```
+
+格式化
+
+```
+pnpm run prettier
+```
+
+eslint
+
+```
+pnpm run eslint
+```

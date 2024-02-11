@@ -23,6 +23,3 @@ pnpm run build
 ```
 pnpm run test
 ```
-
-
-

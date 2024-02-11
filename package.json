@@ -5,7 +5,6 @@
   "private": true,
   "license": "ISC",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "jest --passWithNoTests --config jest.config.ts",
     "lint": "eslint",

@@ -50,9 +50,6 @@ const createStore = <T>(createState: StateCreator<T>): StoreApi<T> => {
   return api
 }
 
-/**
- * `useStore` 借助 `useSyncExternalStoreWithSelector` 完成订阅、状态选取、re-render优化，返回选取的状态
- */
 const useStore = <State, StateSlice>(
   api: StoreApi<State>,
   selector: (state: State) => StateSlice = api.getState as any,

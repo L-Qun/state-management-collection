@@ -2,4 +2,4 @@
 
 ## Check List
 
-- [ ] `pnpm run prettier` for formatting code and docs
+- [ ] 欢迎贡献代码，需要确保在 PR 中包含足够多并且清晰的注释

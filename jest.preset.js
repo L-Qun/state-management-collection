@@ -8,4 +8,4 @@ const config = {
   testTimeout: 35000,
 }
 
-export default config
+module.exports = config

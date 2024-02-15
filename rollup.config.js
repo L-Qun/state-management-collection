@@ -76,7 +76,7 @@ module.exports = (args) => {
 
   return [
     createDeclarationConfig(input, output),
-    createESMConfig(`${input}/src/index.ts`, `${output}/index.ems.js`),
+    createESMConfig(`${input}/src/index.ts`, `${output}/index.mjs`),
     createCommonJSConfig(`${input}/src/index.ts`, `${output}/index.cjs.js`),
     createUMDConfig(
       `${input}/src/index.ts`,

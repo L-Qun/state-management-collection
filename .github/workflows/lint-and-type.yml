@@ -27,3 +27,5 @@ jobs:
         run: pnpm run prettier:ci
       - name: Lint
         run: pnpm run eslint:ci
+      - name: Type
+        run: pnpm run typecheck:ci

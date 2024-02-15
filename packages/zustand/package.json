@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config jest.config.ts"
+    "test": "jest --config jest.config.ts",
+    "typecheck": "tsc"
   },
   "exports": {
     ".": {

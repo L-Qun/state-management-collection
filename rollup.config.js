@@ -1,8 +1,8 @@
 const createBabelConfig = require('./babel.config.js')
 const resolve = require('@rollup/plugin-node-resolve')
-const typescript = require('@rollup/plugin-typescript')
 const babelPlugin = require('@rollup/plugin-babel')
 const commonjs = require('@rollup/plugin-commonjs')
+const { dts } = require('rollup-plugin-dts')
 
 const extensions = ['.ts', '.tsx']
 
@@ -17,18 +17,12 @@ function getBabelOptions() {
 
 function createDeclarationConfig(input, output) {
   return {
-    input: `${input}/src/index.ts`,
+    input,
     output: {
-      dir: output,
+      file: output,
+      format: 'es',
     },
-    plugins: [
-      typescript({
-        declaration: true,
-        emitDeclarationOnly: true,
-        outDir: output,
-        tsconfig: `${input}/tsconfig.json`,
-      }),
-    ],
+    plugins: [dts()],
   }
 }
 
@@ -71,13 +65,13 @@ function createUMDConfig(input, output, name) {
 module.exports = (args) => {
   const packageName = args.package
 
-  const input = `packages/${packageName}`
+  const input = `packages/${packageName}/src/index.ts`
   const output = `packages/${packageName}/dist`
 
   return [
-    createDeclarationConfig(input, output),
-    createESMConfig(`${input}/src/index.ts`, `${output}/index.mjs`),
-    createCommonJSConfig(`${input}/src/index.ts`, `${output}/index.cjs.js`),
+    createDeclarationConfig(input, `${output}/index.d.ts`),
+    createESMConfig(input, `${output}/index.mjs`),
+    createCommonJSConfig(input, `${output}/index.cjs`),
     createUMDConfig(
       `${input}/src/index.ts`,
       `${output}/index.umd.js`,

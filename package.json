@@ -11,7 +11,7 @@
     "eslint:ci": "eslint --no-eslintrc -c .eslintrc.json '**/src/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier '**/{examples,src,__tests__,website}/**/*.{js,jsx,ts,tsx,md}' --write",
     "prettier:ci": "prettier '**/{examples,src,__tests__,website}/**/*.{js,jsx,ts,tsx,md}' --list-different",
-    "typecheck:ci": "pnpm -r --parallel run typecheck",
+    "typecheck": "pnpm -r --parallel run typecheck",
     "build": "concurrently 'pnpm:build:*'",
     "build:jotai": "rollup -c --package jotai",
     "build:zustand": "rollup -c --package zustand",

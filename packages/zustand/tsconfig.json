@@ -1,9 +1,9 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "jotai": ["./src/index.ts"],
-      "jotai/*": ["./src/*.ts"],
+      "zustand": ["./src/index.ts"],
+      "zustand/*": ["./src/*.ts"],
     },
   },
   "include": ["src"],

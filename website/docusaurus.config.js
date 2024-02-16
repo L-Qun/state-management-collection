@@ -63,13 +63,13 @@ const config = {
         title: 'State Management Collection',
         items: [
           {
-            to: '/docs/jotai/manage-docs-versions',
+            to: '/jotai',
             label: 'Jotai',
             position: 'right',
           },
-          { to: '/docs/zustand', label: 'Zustand', position: 'right' },
-          { to: '/docs/valtio', label: 'Valtio', position: 'right' },
-          { to: '/docs/react-query', label: 'React-Query', position: 'right' },
+          { to: '/zustand', label: 'Zustand', position: 'right' },
+          { to: '/valtio', label: 'Valtio', position: 'right' },
+          { to: '/react-query', label: 'React-Query', position: 'right' },
           {
             href: 'https://github.com/q-u-n/state-management-collection.git',
             label: 'GitHub',

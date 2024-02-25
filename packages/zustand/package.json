@@ -1,6 +1,6 @@
 {
   "name": "custom-zustand",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A custom implementation of Zustand",
   "author": "q-u-n",
   "type": "module",
@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest --passWithNoTests --config jest.config.ts",
     "build": "pnpm run -w build:zustand",
+    "prepublishOnly": "pnpm run build",
     "typecheck": "tsc"
   },
   "exports": {

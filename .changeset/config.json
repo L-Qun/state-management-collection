@@ -4,5 +4,6 @@
     { "repo": "q-u-n/state-management-collection" }
   ],
   "access": "public",
-  "baseBranch": "main"
+  "baseBranch": "main",
+  "tag": true
 }

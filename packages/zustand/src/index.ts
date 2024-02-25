@@ -1,2 +1,2 @@
-export { create } from './react'
-export { shallow } from './shallow'
+export * from './react'
+export * from './shallow'

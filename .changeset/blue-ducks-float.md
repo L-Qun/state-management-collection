@@ -1,0 +1,5 @@
+---
+"custom-zustand": patch
+---
+
+update

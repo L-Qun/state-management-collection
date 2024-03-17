@@ -1,7 +1,43 @@
-import { useReducer, useEffect, useCallback } from 'react'
+/// <reference types="react/experimental" />
+
+import ReactExports, { useReducer, useEffect, useCallback } from 'react'
 
 import { ReadableAtom, WritableAtom } from './atom'
 import { useStore } from './store'
+
+const use =
+  // 判断react是否包含了use hooks，如果没有的话采用自己实现的方案。
+  ReactExports.use ||
+  (<T>(
+    promise: PromiseLike<T> & {
+      status?: 'pending' | 'fulfilled' | 'rejected'
+      value?: T
+      reason?: unknown
+    },
+  ): T => {
+    if (promise.status === 'pending') {
+      throw promise
+    } else if (promise.status === 'fulfilled') {
+      return promise.value as T
+    } else if (promise.status === 'rejected') {
+      throw promise.reason
+    } else {
+      promise.status = 'pending'
+      promise.then(
+        (v) => {
+          promise.status = 'fulfilled'
+          promise.value = v
+        },
+        (e) => {
+          promise.status = 'rejected'
+          promise.reason = e
+        },
+      )
+      throw promise
+    }
+  })
+
+const isPromiseLike = (x: any) => typeof x.then === 'function'
 
 export const useSetAtom = <Value, Args extends unknown[], Result>(
   atom: WritableAtom<Value, Args, Result>,
@@ -39,7 +75,7 @@ export const useAtomValue = <Value>(atom: ReadableAtom<Value>) => {
     return unsub
   }, [store, atom])
 
-  return value
+  return isPromiseLike(value) ? use(value) : value
 }
 
 export const useAtom = <Value, Args extends unknown[], Result>(

@@ -12,12 +12,15 @@ export function shallow<T>(objA: T, objB: T) {
   }
 
   const keysA = Object.keys(objA)
-  if (keysA.length !== Object.keys(objB).length) {
+  const keysB = Object.keys(objB)
+
+  if (keysA.length !== keysB.length) {
     return false
   }
+
   for (let i = 0; i < keysA.length; i++) {
     if (
-      !Object.prototype.hasOwnProperty.call(objB, keysA[i] as string) ||
+      !Object.prototype.hasOwnProperty.call(objB, keysA[i]) ||
       !Object.is(objA[keysA[i] as keyof T], objB[keysA[i] as keyof T])
     ) {
       return false

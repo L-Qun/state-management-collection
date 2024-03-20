@@ -90,7 +90,6 @@ const config = {
         appId: '9DK1UPMTNU',
         apiKey: '66a231b604075429d52bd5b90ea702f7',
         indexName: 'juejin-q-u-n',
-        contextualSearch: true,
       },
     }),
 }

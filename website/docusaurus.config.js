@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/logo.png',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://juejin.q-u-n.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -85,6 +85,12 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+      },
+      algolia: {
+        appId: '9DK1UPMTNU',
+        apiKey: '66a231b604075429d52bd5b90ea702f7',
+        indexName: 'juejin-q-u-n',
+        contextualSearch: true,
       },
     }),
 }

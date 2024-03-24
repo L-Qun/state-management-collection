@@ -1,4 +1,4 @@
-import { render, fireEvent, cleanup, screen } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { atom, useSetAtom, useAtomValue } from '../src'
 
 it('basic', async () => {

@@ -1,0 +1,45 @@
+{
+  "name": "simple-read",
+  "date": "2024-01-01T09:27:00.904Z",
+  "version": null,
+  "results": [
+    {
+      "name": "atoms=100",
+      "ops": 97284271,
+      "margin": 2.06,
+      "percentSlower": 10.67
+    },
+    {
+      "name": "atoms=1000",
+      "ops": 107753048,
+      "margin": 0.49,
+      "percentSlower": 1.06
+    },
+    {
+      "name": "atoms=10000",
+      "ops": 108426369,
+      "margin": 1.67,
+      "percentSlower": 0.44
+    },
+    {
+      "name": "atoms=100000",
+      "ops": 108627603,
+      "margin": 0.3,
+      "percentSlower": 0.25
+    },
+    {
+      "name": "atoms=1000000",
+      "ops": 108903773,
+      "margin": 0.32,
+      "percentSlower": 0
+    }
+  ],
+  "fastest": {
+    "name": "atoms=1000000",
+    "index": 4
+  },
+  "slowest": {
+    "name": "atoms=100",
+    "index": 0
+  }
+}

@@ -44,14 +44,13 @@ export const useSetAtom = <Value, Args extends unknown[], Result>(
 ) => {
   // 获取store
   const store = useStore()
-  // 用useCallback包裹一层的目的是保持api引用不变
-  const setAtom = useCallback((...args: Args) => {
-    // 如果是read-only atom则报错
-    if (!('write' in atom)) {
-      throw new Error('not writable atom')
-    }
-    return store.set(atom, ...args)
-  }, [])
+  // 用useCallback包裹一层的目的是保持返回的setAtom引用不变
+  const setAtom = useCallback(
+    (...args: Args) => {
+      return store.set(atom, ...args)
+    },
+    [store, atom],
+  )
   return setAtom
 }
 

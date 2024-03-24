@@ -1,7 +1,7 @@
 {
   "name": "custom-jotai",
   "version": "1.0.0",
-  "description": "",
+  "description": "A custom implementation of Jotai",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -28,12 +28,9 @@
     "jotai"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "sideEffects": false,
   "license": "ISC",
-  "dependencies": {
-    "shared": "workspace:*"
-  }
+  "dependencies": {}
 }

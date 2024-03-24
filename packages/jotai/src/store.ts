@@ -19,26 +19,32 @@ type Mounted = {
   t: Dependents
 }
 
+type MountedAtoms = Set<AnyReadableAtom>
+
 const hasInitialValue = <T extends ReadableAtom<unknown>>(
   atom: T,
 ): atom is T &
   (T extends ReadableAtom<infer Value> ? { init: Value } : never) =>
   'init' in atom
 
+// 判断两个atom状态是否一致
 const isEqualAtomValue = <Value>(a: AtomState<Value>, b: AtomState<Value>) =>
   'v' in a && 'v' in b && Object.is(a.v, b.v)
 
+// 返回 atom 对应的状态
 const returnAtomValue = <Value>(atomState: AtomState<Value>): Value => {
   return atomState.v
 }
 
 export const createStore = () => {
-  const atomStateMap = new WeakMap<AnyReadableAtom, AtomState>()
   // 维护atom和状态的映射
-  const mountedMap = new WeakMap<AnyReadableAtom, Mounted>()
+  const atomStateMap = new WeakMap<AnyReadableAtom, AtomState>()
   // 维护订阅atom，当sub atom时会将atom加入到mountedMap中
-  const pendingMap = new Map<AnyReadableAtom, AtomState | undefined>()
+  const mountedMap = new WeakMap<AnyReadableAtom, Mounted>()
   // 维护需要更新状态的atom的集合
+  const pendingMap = new Map<AnyReadableAtom, AtomState | undefined>()
+
+  let mountedAtoms: MountedAtoms = new Set() // 用于给 Jotai DevTools 使用
 
   const getAtomState = <Value>(atom: ReadableAtom<Value>) =>
     atomStateMap.get(atom) as AtomState<Value> | undefined // 从atomStateMap上获取状态
@@ -65,11 +71,7 @@ export const createStore = () => {
       d: nextDependencies || new Map(),
       v: value,
     }
-    if (
-      prevAtomState &&
-      isEqualAtomValue(prevAtomState, nextAtomState) &&
-      prevAtomState.d === nextAtomState.d
-    ) {
+    if (prevAtomState && isEqualAtomValue(prevAtomState, nextAtomState)) {
       // 这里会判断最新的状态和先前的状态是否一致，也就是判断v是否一致，不一致才需要更新状态
       return prevAtomState
     }
@@ -88,7 +90,7 @@ export const createStore = () => {
     }
     const nextDependencies: NextDependencies = new Map()
     const getter: Getter = <V>(a: ReadableAtom<V>) => {
-      // 这里需要判断是不是读当前的atom还是读的其他atom
+      // 这里需要判断是读当前的atom还是读的其他atom
       if ((a as AnyReadableAtom) === atom) {
         const aState = getAtomState(a)
         if (aState) {
@@ -157,17 +159,6 @@ export const createStore = () => {
     return result
   }
 
-  const writeAtom = <Value, Args extends unknown[], Result>(
-    atom: WritableAtom<Value, Args, Result>,
-    ...args: Args
-  ): Result => {
-    // 更新atom状态
-    const result = writeAtomState(atom, ...args)
-    // 触发重新渲染
-    flushPending()
-    return result
-  }
-
   const flushPending = (): void | Set<AnyReadableAtom> => {
     while (pendingMap.size) {
       const pending = Array.from(pendingMap)
@@ -186,11 +177,22 @@ export const createStore = () => {
     }
   }
 
+  const writeAtom = <Value, Args extends unknown[], Result>(
+    atom: WritableAtom<Value, Args, Result>,
+    ...args: Args
+  ): Result => {
+    // 更新atom状态
+    const result = writeAtomState(atom, ...args)
+    // 触发重新渲染
+    flushPending()
+    return result
+  }
+
   const mountAtom = <Value>(
     atom: ReadableAtom<Value>,
     initialDependent?: AnyReadableAtom,
   ): Mounted => {
-    // 分析atom依赖了哪些其他atom，然后将逐个加入到mountedMap中
+    // 分析atom依赖了哪些其他atom，然后逐个加入到mountedMap中
     getAtomState(atom)?.d.forEach((_, a) => {
       // 寻找依赖的方式是通过getAtomState(atom)，上面的d参数就是atom依赖的其他atom。这个过程是记录atom的依赖项，这样当状态变化时就知道要去重新计算哪些atom的状态。
       const aMounted = mountedMap.get(a)
@@ -198,8 +200,8 @@ export const createStore = () => {
         aMounted.t.add(atom)
       } else {
         if (a !== atom) {
-          mountAtom(a, atom)
           // 递归，确保直接或间接依赖都加入到mountedMap中
+          mountAtom(a, atom)
         }
       }
     })
@@ -209,6 +211,7 @@ export const createStore = () => {
     }
     mountedMap.set(atom, mounted)
     // 将atom加入到mountedMap中
+    mountedAtoms.add(atom)
     return mounted
   }
 
@@ -238,15 +241,16 @@ export const createStore = () => {
     }
   }
 
+  // 完成对atom的订阅，listener的作用是当atom状态发生变化时调用listener来完成组件的重新渲染
   const subscribeAtom = (atom: AnyReadableAtom, listener: () => void) => {
-    // 完成对atom的订阅，listener的作用是当atom状态发生变化时调用listener来完成组件的重新渲染
-    const mounted = addAtom(atom)
     // 将当前atom加入到mountedMap中
+    const mounted = addAtom(atom)
     const listeners = mounted.l
+    // 这里的listener就是useReducer返回的rerender函数，调用可以触发对应组件重新渲染
     listeners.add(listener)
+    // 返回unsub函数，当组件卸载时调用
     return () => {
       unmountAtom(atom)
-      // 返回unsub函数，当组件卸载时调用
     }
   }
 
@@ -254,6 +258,7 @@ export const createStore = () => {
     get: readAtom,
     set: writeAtom,
     sub: subscribeAtom,
+    get_mounted_atoms: () => mountedAtoms.values(), // 用于给 Jotai DevTools 使用
   }
 }
 

@@ -51,3 +51,9 @@ pnpm run eslint
 ```
 pnpm run typecheck
 ```
+
+发布库
+
+```
+pnpm run release
+```

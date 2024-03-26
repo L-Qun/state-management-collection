@@ -33,7 +33,5 @@
   ],
   "sideEffects": false,
   "license": "ISC",
-  "dependencies": {
-    "shared": "workspace:*"
-  }
+  "dependencies": {}
 }

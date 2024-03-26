@@ -34,6 +34,14 @@
   ],
   "sideEffects": false,
   "license": "MIT",
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/q-u-n/state-management-collection/issues"
+  },
+  "homepage": "https://github.com/q-u-n/state-management-collection",
   "dependencies": {},
   "peerDependencies": {
     "react": ">=17.0.0"

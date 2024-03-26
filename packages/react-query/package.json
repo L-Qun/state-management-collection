@@ -6,6 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests --config jest.config.ts",
+    "build": "pnpm run -w build:react-query",
+    "prepublishOnly": "pnpm run build",
     "typecheck": "tsc"
   },
   "exports": {
@@ -32,6 +34,6 @@
     "src"
   ],
   "sideEffects": false,
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {}
 }

@@ -1,5 +1,4 @@
-import { act } from '@testing-library/react'
-import { fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { create } from '../src/index'
 
 type FilterType = 'all' | 'completed' | 'incompleted'

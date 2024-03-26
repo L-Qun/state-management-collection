@@ -1,6 +1,4 @@
-import { act, fireEvent } from '@testing-library/react'
-import { render } from '@testing-library/react'
-import React from 'react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { create } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { useShallow } from 'zustand/react/shallow'

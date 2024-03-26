@@ -12,7 +12,16 @@
   <a href="#license"><img src="https://img.shields.io/github/license/sourcerer-io/hall-of-fame.svg?colorB=ff0000"></a>
 </p>
 
-该项目用于学习，包含了状态管理库包含Zustand/Jotai/Valtio/React-Query实现，代码中包含了详细的注释用来学习实践。
+掘金小册链接：https://juejin.cn/book/7311970169411567626?utm_source=course_list
+
+项目中包含：
+
+- 状态管理库 —— Zustand/Jotai/Valtio/React-Query 实现
+- 完整的项目配置
+- 文档站
+- 大量的案例代码
+
+以及完善的注释用来学习和实践。
 
 ## 使用
 

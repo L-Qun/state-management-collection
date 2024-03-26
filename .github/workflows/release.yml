@@ -24,7 +24,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Create Release Pull Request or Publish to npm
-        id: changesets
         uses: changesets/action@master
         with:
           publish: pnpm run release

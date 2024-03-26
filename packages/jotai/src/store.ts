@@ -44,7 +44,7 @@ export const createStore = () => {
   // 维护需要更新状态的atom的集合
   const pendingMap = new Map<AnyReadableAtom, AtomState | undefined>()
 
-  let mountedAtoms: MountedAtoms = new Set() // 用于给 Jotai DevTools 使用
+  const mountedAtoms: MountedAtoms = new Set() // 用于给 Jotai DevTools 使用
 
   const getAtomState = <Value>(atom: ReadableAtom<Value>) =>
     atomStateMap.get(atom) as AtomState<Value> | undefined // 从atomStateMap上获取状态

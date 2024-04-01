@@ -1,5 +1,6 @@
-import { create } from "zustand";
-import { produce } from "immer";
+import { create } from 'zustand'
+// import { produce } from 'immer'
+import { produce } from './produce'
 
 const useStore = create((set) => ({
   deep: {
@@ -12,10 +13,10 @@ const useStore = create((set) => ({
   increment: () =>
     set((state) =>
       produce(state, (draft) => {
-        draft.deep.nested.obj.count++;
-      })
+        draft.deep.nested.obj.count++
+      }),
     ),
-}));
+}))
 
 export default function App() {
   const {
@@ -25,12 +26,12 @@ export default function App() {
       },
     },
     increment,
-  } = useStore();
+  } = useStore()
 
   return (
     <div>
       <div>{count}</div>
       <button onClick={increment}>+1</button>
     </div>
-  );
+  )
 }

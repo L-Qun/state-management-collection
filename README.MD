@@ -17,8 +17,6 @@
   <a href="#license"><img src="https://img.shields.io/github/license/sourcerer-io/hall-of-fame.svg?colorB=ff0000"></a>
 </p>
 
-掘金小册链接：https://juejin.cn/book/7311970169411567626?utm_source=course_list
-
 项目中包含：
 
 - 状态管理库 —— Zustand/Jotai/Valtio/React-Query 实现

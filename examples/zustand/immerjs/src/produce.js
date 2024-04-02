@@ -30,9 +30,11 @@ const handler = {
     return value
   },
   set(state, prop, value) {
-    state.copy_ = { ...state.base_ }
+    if (!state.modified_) {
+      state.copy_ = { ...state.base_ }
+      markChanged(state) // 标记修改
+    }
     state.copy_[prop] = value // 更新状态
-    markChanged(state) // 标记修改
     return true
   },
 }

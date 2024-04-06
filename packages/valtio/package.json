@@ -1,7 +1,7 @@
 {
   "name": "custom-valtio",
   "version": "1.0.0",
-  "description": "",
+  "description": "A custom implementation of Valtio",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -30,10 +30,21 @@
     "valtio"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "sideEffects": false,
   "license": "MIT",
-  "dependencies": {}
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/q-u-n/state-management-collection/issues"
+  },
+  "homepage": "https://github.com/q-u-n/state-management-collection",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": ">=18.0"
+  }
 }

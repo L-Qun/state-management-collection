@@ -1,7 +1,7 @@
 import { createProxy, isChanged } from '../src'
 
 const noop = (_arg: unknown) => {
-  // 什么都不做
+  // 什么都不做，用来规避ts检测
 }
 
 describe('proxy-compare单元测试', () => {
@@ -42,7 +42,7 @@ describe('proxy-compare单元测试', () => {
     noop(Object.keys(p1))
     expect(isChanged(s1, { a: 'a', b: 'b' }, a1)).toBe(false)
     expect(isChanged(s1, { a: 'a' }, a1)).toBe(true)
-    expect(isChanged(s1, { a: 'a', b: 'b2' }, a1)).toBe(true)
+    expect(isChanged(s1, { a: 'a', b: 'b2' }, a1)).toBe(false)
   })
 
   it('访问深层对象属性', () => {

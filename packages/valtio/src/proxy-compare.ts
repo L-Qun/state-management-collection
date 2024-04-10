@@ -21,6 +21,7 @@ const isObject = (x: unknown): x is object =>
 const createProxyHandler = <T extends object>(origObj: T) => {
   const state: ProxyHandlerState<T> = {}
 
+  // 记录属性访问情况
   const recordUsage = (
     type:
       | typeof HAS_KEY_PROPERTY

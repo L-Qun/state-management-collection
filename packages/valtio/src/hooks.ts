@@ -4,8 +4,8 @@ import { snapshot, subscribe } from './vanilla'
 import { createProxy, isChanged } from './proxy-compare'
 
 export function useSnapshot<T extends object>(proxyObject: T): T {
-  const lastSnapshot = useRef<T>()
   const affected = useMemo(() => new WeakMap<object, unknown>(), [proxyObject])
+  const lastSnapshot = useRef<T>()
   const currSnapshot = useSyncExternalStore(
     (callback) => {
       // 进行订阅

@@ -17,32 +17,20 @@ type ProxyState = readonly [
 const proxyStateMap = new WeakMap<object, any>()
 
 const buildProxyFunction = (
+  // 快照缓存
   snapCache = new WeakMap<object, [version: number, snap: unknown]>(),
 
   // 获取最新状态
   createSnapshot = <T extends object>(target: T, version: number): T => {
     const cache = snapCache.get(target)
+    // 判断当前状态版本是否在缓存中
     if (cache?.[0] === version) {
       return cache[1] as T
     }
-    const snap: any = Array.isArray(target)
-      ? []
-      : Object.create(Object.getPrototypeOf(target))
+    const snap: any = Array.isArray(target) ? [...target] : { ...target }
+    // 缓存新快照
     snapCache.set(target, [version, snap])
-    Reflect.ownKeys(target).forEach((key) => {
-      const value = Reflect.get(target, key)
-      const { enumerable } = Reflect.getOwnPropertyDescriptor(
-        target,
-        key,
-      ) as PropertyDescriptor
-      const desc: PropertyDescriptor = {
-        value,
-        enumerable: enumerable as boolean,
-        configurable: true,
-      }
-      Object.defineProperty(snap, key, desc)
-    })
-    return Object.preventExtensions(snap)
+    return snap
   },
 
   // 追踪状态更新、触发组件重新渲染

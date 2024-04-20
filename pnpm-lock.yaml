@@ -138,7 +138,11 @@ importers:
         specifier: '>=17.0.0'
         version: 18.2.0
 
-  packages/react-query: {}
+  packages/react-query:
+    dependencies:
+      react:
+        specifier: '>=18.0'
+        version: 18.2.0
 
   packages/valtio:
     dependencies:

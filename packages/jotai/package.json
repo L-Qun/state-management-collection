@@ -2,6 +2,7 @@
   "name": "custom-jotai",
   "version": "2.0.0",
   "description": "A custom implementation of Jotai",
+  "author": "q-u-n",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -43,6 +44,7 @@
   },
   "homepage": "https://github.com/q-u-n/state-management-collection",
   "dependencies": {},
+  "devDependencies": {},
   "peerDependencies": {
     "react": ">=17.0.0"
   }

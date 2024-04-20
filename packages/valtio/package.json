@@ -2,8 +2,11 @@
   "name": "custom-valtio",
   "version": "1.0.0",
   "description": "A custom implementation of Valtio",
+  "author": "q-u-n",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests --config jest.config.ts",
     "build": "pnpm run -w build:valtio",

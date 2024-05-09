@@ -19,9 +19,9 @@
 
 项目中包含：
 
-- 状态管理库 —— Zustand/Jotai/Valtio/React-Query 实现
+- 状态管理库 —— Zustand/Jotai/Valtio/TanStack Query 实现
 - 完整的项目配置
-- 文档站
+- 文档站实现
 - 大量的案例代码
 
 以及完善的注释用来学习和实践。

@@ -35,7 +35,8 @@
   },
   "rules": {
     "import/no-unresolved": ["error", { "commonjs": true, "amd": true }],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off"
   },
   "overrides": [
     {

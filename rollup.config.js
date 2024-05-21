@@ -3,8 +3,10 @@ const resolve = require('@rollup/plugin-node-resolve')
 const babelPlugin = require('@rollup/plugin-babel')
 const commonjs = require('@rollup/plugin-commonjs')
 const { dts } = require('rollup-plugin-dts')
+const banner2 = require('rollup-plugin-banner2')
 
 const extensions = ['.ts', '.tsx']
+const cscComment = `'use client';\n`
 
 function getBabelOptions() {
   return {
@@ -34,6 +36,7 @@ function createESMConfig(input, output) {
       resolve({ extensions }),
       commonjs(),
       babelPlugin(getBabelOptions()),
+      banner2(() => cscComment),
     ],
   }
 }
@@ -46,6 +49,7 @@ function createCommonJSConfig(input, output) {
       resolve({ extensions }),
       commonjs(),
       babelPlugin(getBabelOptions()),
+      banner2(() => cscComment),
     ],
   }
 }
@@ -58,6 +62,7 @@ function createUMDConfig(input, output, name) {
       resolve({ extensions }),
       commonjs(),
       babelPlugin(getBabelOptions()),
+      banner2(() => cscComment),
     ],
   }
 }

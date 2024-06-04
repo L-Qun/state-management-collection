@@ -3,9 +3,7 @@
     State Management Collection
     <br />
     <br />
-    <a href="https://juejin.cn/book/7311970169411567626?utm_source=course_list">
-      <img src="./website/static/img/juejin.jpg" alt="State Management Collection" width="200">
-    </a>
+    <img src="./website/static/img/juejin.jpg" alt="State Management Collection" width="200">
   </h1>
 </div>
 

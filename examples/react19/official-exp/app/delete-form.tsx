@@ -1,25 +1,25 @@
-"use client";
+'use client'
 
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import { deleteTodo } from "@/app/actions";
+import { useActionState } from 'react'
+import { useFormStatus } from 'react-dom'
+import { deleteTodo } from '@/app/actions'
 
 const initialState = {
-  message: "",
-};
+  message: '',
+}
 
 function DeleteButton() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   return (
     <button type="submit" aria-disabled={pending}>
       Delete
     </button>
-  );
+  )
 }
 
 export function DeleteForm({ id, todo }: { id: number; todo: string }) {
-  const [state, formAction] = useActionState(deleteTodo, initialState);
+  const [state, formAction] = useActionState(deleteTodo, initialState)
 
   return (
     <form action={formAction}>
@@ -30,5 +30,5 @@ export function DeleteForm({ id, todo }: { id: number; todo: string }) {
         {state?.message}
       </p>
     </form>
-  );
+  )
 }

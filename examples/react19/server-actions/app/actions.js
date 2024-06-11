@@ -19,9 +19,8 @@ export const getTodos = async () => {
   return TODOS
 }
 
-export const formAction = async (_, formData) => {
+export const formAction = async (formData) => {
   const todo = formData.get('todo')
-  console.log(todo)
   await wait()
   TODOS.push({
     id: TODOS.length,

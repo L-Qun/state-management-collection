@@ -14,6 +14,7 @@ export default function Home() {
   async function onSubmit(event) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
+
     // 清空表单数据
     event.currentTarget.reset()
 

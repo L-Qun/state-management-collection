@@ -1,6 +1,11 @@
-import { useStore } from './store'
+import { useState } from "react"
 
 export default function App() {
-  const todo = useStore.getState().todo
-  return <div>todo: {todo}</div>
+  const [count, setCount] = useState(0)
+  return (
+    <>
+      <div>count: {count}</div>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  )
 }

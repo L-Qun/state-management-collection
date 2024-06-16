@@ -2,18 +2,17 @@ import { createContext, useRef, useContext } from 'react'
 import { useStore } from 'zustand'
 import { createStore } from 'zustand/vanilla'
 
-// export const useStore = create((set) => ({
-//   todo: null,
-// }))
-
+// 创建 Store
 export const createTodoStore = (todo) => {
   return createStore()((set) => ({
     todo,
   }))
 }
 
+// 创建 React Context，用来分发 Store
 export const TodoStoreContext = createContext(undefined)
 
+// 需要将这个 Provider 包裹在组件外面用来创建 Store、填充数据
 export const TodoStoreProvider = ({ children, todo }) => {
   const storeRef = useRef()
   if (!storeRef.current) {
@@ -27,6 +26,7 @@ export const TodoStoreProvider = ({ children, todo }) => {
   )
 }
 
+// 在组件中使用该 Hook
 export const useTodoStore = (selector) => {
   const todoStoreContext = useContext(TodoStoreContext)
 

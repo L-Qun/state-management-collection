@@ -1,4 +1,4 @@
-name: Brnchmark
+name: Benchmarks
 
 on:
   push:
@@ -26,9 +26,10 @@ jobs:
       - name: Run benchmarks
         run: pnpm --filter jotai run benchmarks
       - name: Generate Markdown Table
+        id: generate_table
         run: |
           FILES=("packages/jotai/benchmarks/simple-read.json" "packages/jotai/benchmarks/simple-write.json" "packages/jotai/benchmarks/subscribe-write.json")
-          echo "RESULTS=" > table.md
+          echo "## Benchmark Results" > table.md
           for file in "${FILES[@]}"; do
             if [ -f "$file" ]; then
               name=$(jq -r '.name' "$file")
@@ -39,6 +40,8 @@ jobs:
               echo "" >> table.md
             fi
           done
+          cat table.md
+        continue-on-error: false
       - name: Read table.md
         id: table_content
         run: echo "TABLE_CONTENT=$(cat table.md)" >> $GITHUB_ENV

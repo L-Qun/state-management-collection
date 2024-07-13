@@ -1,4 +1,4 @@
-name: Benchmarks
+name: Benchmark
 
 on:
   push:
@@ -12,19 +12,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: pnpm
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
+
       - name: Run benchmarks
         run: pnpm --filter jotai run benchmarks
+
       - name: Generate Markdown Table
         id: generate_table
         run: |
@@ -41,12 +46,17 @@ jobs:
             fi
           done
           cat table.md
-        continue-on-error: false
+
       - name: Read table.md
-        id: table_content
-        run: echo "TABLE_CONTENT=$(cat table.md)" >> $GITHUB_ENV
+        id: read_table
+        run: |
+          table_content=$(cat table.md)
+          echo "table_content<<EOF" >> $GITHUB_ENV
+          echo "$table_content" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Create Comment
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body: ${{ env.TABLE_CONTENT }}
+          body: ${{ env.table_content }}

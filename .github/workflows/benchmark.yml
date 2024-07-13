@@ -1,0 +1,62 @@
+name: Benchmark
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run benchmarks
+        run: pnpm --filter jotai run benchmarks
+
+      - name: Generate Markdown Table
+        id: generate_table
+        run: |
+          FILES=("packages/jotai/benchmarks/simple-read.json" "packages/jotai/benchmarks/simple-write.json" "packages/jotai/benchmarks/subscribe-write.json")
+          echo "## Benchmark Results" > table.md
+          for file in "${FILES[@]}"; do
+            if [ -f "$file" ]; then
+              name=$(jq -r '.name' "$file")
+              echo "### $name" >> table.md
+              echo "| Test Case | Ops/sec | Margin of Error |" >> table.md
+              echo "|-----------|---------|-----------------|" >> table.md
+              jq -r '.results[] | "| \(.name) | \(.ops) | \(.margin)% |"' "$file" >> table.md
+              echo "" >> table.md
+            fi
+          done
+          cat table.md
+
+      - name: Read table.md
+        id: read_table
+        run: |
+          table_content=$(cat table.md)
+          echo "table_content<<EOF" >> $GITHUB_ENV
+          echo "$table_content" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ env.table_content }}

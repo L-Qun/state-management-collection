@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <title>simple-read</title>
+    <title>simple-write</title>
     <style>
       body {
         margin: 0;
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="container">
-      <canvas id="chart1720882724143" width="16" height="9"></canvas>
+      <canvas id="chart1720882724061" width="16" height="9"></canvas>
     </div>
     <script>
       const format = (num) => {
@@ -51,18 +51,18 @@
           chunked.map((chunk) => chunk.join('')).join(' ') + fractionStr
         )
       }
-      const ctx1720882724143 = document
-        .getElementById('chart1720882724143')
+      const ctx1720882724061 = document
+        .getElementById('chart1720882724061')
         .getContext('2d')
-      const chart1720882724143 = new Chart(ctx1720882724143, {
+      const chart1720882724061 = new Chart(ctx1720882724061, {
         type: 'bar',
         data: {
           labels: ["atoms=100","atoms=1000","atoms=10000","atoms=100000","atoms=1000000"],
           datasets: [
             {
-              data: [102283963,97332677,92514518,91771410,93735761],
-              backgroundColor: ["hsl(120, 85%, 55%)","hsl(114.19200000000001, 85%, 55%)","hsl(108.54, 85%, 55%)","hsl(107.664, 85%, 55%)","hsl(109.968, 85%, 55%)"],
-              borderColor: ["hsl(120, 85%, 55%)","hsl(114.19200000000001, 85%, 55%)","hsl(108.54, 85%, 55%)","hsl(107.664, 85%, 55%)","hsl(109.968, 85%, 55%)"],
+              data: [1074463,974091,916754,891182,920674],
+              backgroundColor: ["hsl(120, 85%, 55%)","hsl(108.792, 85%, 55%)","hsl(102.384, 85%, 55%)","hsl(99.528, 85%, 55%)","hsl(102.828, 85%, 55%)"],
+              borderColor: ["hsl(120, 85%, 55%)","hsl(108.792, 85%, 55%)","hsl(102.384, 85%, 55%)","hsl(99.528, 85%, 55%)","hsl(102.828, 85%, 55%)"],
               borderWidth: 2,
             },
           ],
@@ -72,7 +72,7 @@
           plugins: {
             title: {
               display: true,
-              text: 'simple-read',
+              text: 'simple-write',
               font: { size: 20 },
               padding: 20,
             },

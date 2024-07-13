@@ -27,7 +27,7 @@ jobs:
         run: pnpm --filter jotai run benchmarks
       - name: Generate Markdown Table
         run: |
-          FILES=("benchmarks/simple-read.json" "benchmarks/simple-write.json" "benchmarks/subscribe-write.json")
+          FILES=("packages/jotai/benchmarks/simple-read.json" "packages/jotai/benchmarks/simple-write.json" "packages/jotai/benchmarks/subscribe-write.json")
           echo "RESULTS=" > table.md
           for file in "${FILES[@]}"; do
             if [ -f "$file" ]; then

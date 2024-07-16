@@ -1,5 +1,3 @@
-#!/usr/bin/env npx tsx
-
 import { add, complete, cycle, save, suite } from 'benny'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'

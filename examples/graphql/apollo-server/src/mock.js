@@ -13,7 +13,7 @@ const author1 = {
   nationality: 'American',
 }
 const author2 = { name: 'author2', books: [book2], nationality: 'British' }
-const author3 = { name: 'author2', books: [book2], nationality: 'Canadian' }
+const author3 = { name: 'author3', books: [book3], nationality: 'Canadian' }
 
 authors.push(author1, author2, author3)
 

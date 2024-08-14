@@ -4,7 +4,7 @@ import { books, authors } from './mock.js'
 
 const typeDefs = `
   type Book {
-    title: String
+    title: String!
     authors: [Author]
     year: Int
   }
@@ -16,8 +16,8 @@ const typeDefs = `
   }
 
   type Query {
-    books: [Book]
-    authors: [Author]
+    books: [Book!]!
+    authors: [Author!]!
   }
 
   type Mutation {

@@ -1,6 +1,6 @@
 {
   "name": "custom-zustand",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "A custom implementation of Zustand",
   "author": "q-u-n",
   "type": "module",
